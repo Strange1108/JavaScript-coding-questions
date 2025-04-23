@@ -1,18 +1,13 @@
-const debounce = (fn, t) => {
-  let timeoutId;
 
-  return (...args) => {
-    clearTimeout(timeoutId);
-
-    timeoutId = setTimeout(() => {
-      fn.apply(this, args);
-    }, t);
-  };
-};
-
-
-  const log = debounce(console.log, 100);
-  log('Hello'); // cancelled
-  log('Hello'); // cancelled
-  log('Hello'); // Logged at t=100ms
-
+new Promise((resolve, reject) => {
+    return setTimeout(() => resolve(1), 1000);
+}).then((result) => {
+    console.log(result);
+    return new Promise(resolve => setTimeout(() => resolve(result*2), 2000));
+}).then((result) => {
+    console.log(result);
+    return new Promise(resolve => setTimeout(() => resolve(result*2), 2000));
+}).then((result) => {
+    console.log(result);
+    return new Promise(resolve => setTimeout(() => resolve(result*2), 2000));
+}).then(result => console.log(result));

@@ -1,35 +1,25 @@
-
-
-function deepEqual(a, b) {
-    // Check for strict equality
-    if (a === b) return true;
-  
-    // Check for null or non-object types
-    if (typeof a !== "object" || typeof b !== "object" || a === null || b === null) {
-      return false;
+function deepMerge(target, source) {
+  for (let key in source) {
+    if (
+      source.hasOwnProperty(key) &&
+      typeof source[key] === 'object' &&
+      source[key] !== null &&
+      !Array.isArray(source[key])
+    ) {
+      if (!target[key]) target[key] = {};
+      deepMerge(target[key], source[key]);
+    } else {
+      target[key] = source[key];
     }
-  
-    // Compare keys length
-    const keysA = Object.keys(a);
-    const keysB = Object.keys(b);
-  
-    if (keysA.length !== keysB.length) return false;
-  
-    // Recursively compare each key
-    for (let key of keysA) {
-      if (!keysB.includes(key) || !deepEqual(a[key], b[key])) {
-        return false;
-      }
-    }
-  
-    return true;
   }
-  
+  return target;
+}
 
+const obj1 = { a: 1, b: { x: 10 } };
+const obj2 = { b: { y: 20 }, c: 3 };
 
-const obj1 = { a: 1, b: { c: 2, d: [3, 4] } };
-const obj2 = { a: 1, b: { c: 2, d: [3, 4] } };
-const obj3 = { a: 1, b: { c: 2, d: [4, 3] } };
+const result = deepMerge({}, obj1);
+deepMerge(result, obj2);
 
-console.log(deepEqual(obj1, obj2)); // true
-console.log(deepEqual(obj1, obj3)); // false
+console.log(result); 
+// { a: 1, b: { x: 10, y: 20 }, c: 3 }
