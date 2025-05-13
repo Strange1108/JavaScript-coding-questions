@@ -1,14 +1,26 @@
-const arr = [1,2,3,4,5];
-
-Array.prototype.myReduce = function (cb, initialValue) {
-    let acc = initialValue;
-    for(let index=0; index<this.length; index++){
-        acc = acc ? cb(acc, this[index]) : this[index];
-    }
-    return acc;
+let person = {
+  firstname: "Kirtesh",
+  lastname: "bansal"
 }
 
-const res = arr.myReduce((acc, cur) => {
-    return acc+cur;
-}, 0);
-console.log(res);
+let printName = function (country) {
+  console.log(this.firstname + " " + this.lastname + " from " 
+  + country);
+}
+
+Function.prototype.mycall = function(obj,...args){ 
+    let sym = Symbol();                                     
+    obj[sym] = this;
+    let res = obj[sym](...args)
+    delete obj[sym];
+    return res;
+}
+
+/*
+Note: Applying mycall method to printName function so this
+will be equal to printName inside mycall function as 
+printName is on the left side of the '.' 
+*/
+
+printName.mycall(person, "India");
+
