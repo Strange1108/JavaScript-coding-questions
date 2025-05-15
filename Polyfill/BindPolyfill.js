@@ -1,3 +1,17 @@
+// let person = {
+//   firstname: "Kirtesh",
+//   lastname: "bansal"
+// }
+
+// let printName = function (country) {
+//   console.log(this.firstname + " " + this.lastname + " from " 
+//   + country);
+// }
+
+// let newPrintName = printName.bind(person, "India");
+// newPrintName();
+
+
 let person = {
   firstname: "Kirtesh",
   lastname: "bansal"
