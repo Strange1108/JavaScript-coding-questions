@@ -91,3 +91,4 @@ Array.prototype.customFind = function (callback) {
 
 const findFirstOddCustom = numbers.customFind(isOddNumber);
 console.log(findFirstOddCustom); // 5
+  
