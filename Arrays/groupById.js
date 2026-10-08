@@ -8,6 +8,16 @@ function groupById(array) {
   }, {});
 }
 
+function groupById(users) {
+    const usersById = {};
+
+    for (const user of users) {
+        usersById[user.id] = user;
+    }
+
+    return usersById;
+}
+
   
 let users = [
   {id: 'john', name: "John Smith", age: 20},
