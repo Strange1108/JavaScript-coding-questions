@@ -1,20 +1,17 @@
 function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
-  
-      [array[i], array[j]] = [array[j], array[i]];
-    }   
-  }
-  
+  const result = [...array];
 
+  for (let i = 0; i < result.length; i++) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+
+    [result[i], result[randomIndex]] =
+      [result[randomIndex], result[i]];
+  }
+
+  return result;
+}
 
 let arr = [1, 2, 3];
-shuffle(arr);
-// arr = [3, 2, 1]
-console.log(arr);
-shuffle(arr);
-// arr = [2, 1, 3]
-console.log(arr);
-shuffle(arr);
-// arr = [3, 1, 2]
-console.log(arr);
+console.log(shuffle(arr));
+console.log(shuffle(arr));
+console.log(shuffle(arr));
